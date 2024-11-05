@@ -3,4 +3,16 @@ title: "Martinez"
 author: "Marine Martinez"
 format: html
 ---
+```{r}
+library(vroom)
+library(here)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+here::i_am("grades-test.Rproj")
+```
+##Question 1 Load the data set.
+```{r}
+grades <- vroom(here("grades.csv"))
+```
 
