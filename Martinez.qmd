@@ -120,4 +120,18 @@ grades|>
   ylab("Number of student")+
   ggtitle("Distribution of the number of grades in Music and Dance")
 ```
+## Question 11: Using a graphical representation to study whether the number of grades per student in Music and Dance depends on the group.
+```{r}
+grades|>
+  filter(str_detect(course,"Music and Dance"))|>
+  group_by(id, group)|>
+  summarise(nb_grades= n(), .groups= "drop")|>
+  mutate(nb_grades = factor(nb_grades, ordered = TRUE, levels = 1:9))|>
+  mutate(group = factor(group, ordered = TRUE, levels = 1:20))|>
+  ggplot(aes(x=nb_grades, fill=group))+
+  geom_bar(position= "fill")+
+  xlab("Number of grades")+
+  ylab("Number of student")+
+  ggtitle("Distribution of the number of grades in Music and Dance")
+```
 
