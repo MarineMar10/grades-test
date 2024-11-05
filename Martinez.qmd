@@ -18,3 +18,13 @@ grades <- vroom(here("grades.csv"))
 ## Question 2 Give the number of grades in the data set directly in the text of your quarto file, in a sentence of the form “The data set contains xxx grades.” where xxx is replaced by the number of grades. This must be computed from the data set.
 The data set contains 68018 grades.
 
+## Question 3: Use distinct() compute the number of students on the data set and report the value directly in the text as in the previous question.
+```{r}
+#| code-fold: false
+grades|>
+  distinct(id)|>
+  summarise(n())
+```
+The number of student is 962. 
+
+
