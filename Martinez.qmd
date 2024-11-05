@@ -195,4 +195,22 @@ grades |>
   geom_point(alpha=0.2)+
   ggtitle("Correlation of subjects for group 2")
 ```
+## Question 16: Let us assume that the final grade of a student is the average of the averages of their grades for each course. Create a data frame with three columns, id, group and final grade based on this definition for the last column. Sort the data frame in decrease order of final grade and include in the quarto rendering its first five rows.
+```{r}
+grades |>
+  group_by(id, group)|>
+  summarise(final= mean(grade), .groups = "drop")|>
+  arrange(desc(final))|>
+  slice(1:5)|>
+  knitr::kable()
+```
+## Question 17 Find a way to study differences in final grades between groups
+```{r}
+grades |>
+  group_by(id, group)|>
+  summarise(final= mean(grade))|>
+  mutate(group = factor(group, ordered = TRUE, levels = 1:20))|>
+  ggplot(aes(x=group, y=final))+
+  geom_col()
+```
 
