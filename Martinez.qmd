@@ -30,7 +30,9 @@ The number of student is 962.
 ## Question 4: Create a students data frame that contains one row per student and two variables, id and group that gives the assignment of each student to their group. Make sure that each student appears on only once in the data frame. Include a short extract of the data frame in the quarto rendering.
 ```{r}
 grades|>
-  distinct(id)
+  distinct(id, group)|>
+  slice_sample(n=5)|>
+  knitr::kable()
 ```
 
 
