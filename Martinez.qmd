@@ -62,3 +62,14 @@ grades |>
   ggtitle("Distribution of mean in groups")
 ```
 
+## Question 7 Compare graphically the distribution of the grades of the 2 semesters.
+```{r}
+grades |>
+  mutate(semester = factor(semester, ordered = TRUE, levels = 1:2))|>
+  ggplot(aes(x=grade, y=semester, fill=semester))+
+  geom_boxplot()+
+  xlab("Grade")+
+  ylab("Semester")+
+  ggtitle("Distribution of grades between semester")
+```
+
