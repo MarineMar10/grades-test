@@ -107,4 +107,17 @@ grades|>
   slice_sample(n=5)|>
   knitr::kable()
 ```
+## Question 10: Compute from the previous data frame the distribution of the number of grades, that is for each number of grades (e.g. 10) the number of students who have exactly this number of grades in Music and Dance. Represent graphically the results.
+```{r}
+grades|>
+  filter(str_detect(course,"Music and Dance"))|>
+  group_by(id, group)|>
+  summarise(nb_grades= n(), .groups= "drop")|>
+  mutate(nb_grades = factor(nb_grades, ordered = TRUE, levels = 1:9))|>
+  ggplot(aes(x=nb_grades, fill=nb_grades))+
+  geom_bar()+
+  xlab("Number of grades")+
+  ylab("Number of student")+
+  ggtitle("Distribution of the number of grades in Music and Dance")
+```
 
