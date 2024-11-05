@@ -98,3 +98,13 @@ grades|>
 | 841| 17.3| 9.9| 5.5| 10.5|
 | 774| 17 | 9.45| 3.0 | 9.5|
 
+## Question 9: Create a data frame that gives for each student their id, their group and the number of grades they obtained in Music and Dance and include in the quarto rendering a small extract of the result.
+```{r}
+grades|>
+  filter(str_detect(course,"Music and Dance"))|>
+  group_by(id, group)|>
+  summarise(nb_grades= n(), .groups= "drop")|>
+  slice_sample(n=5)|>
+  knitr::kable()
+```
+
