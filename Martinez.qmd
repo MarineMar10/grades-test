@@ -147,4 +147,15 @@ grades |>
   slice_sample(n=5)|>
   knitr::kable()
 ```
+## Question 13: Show the average grades in Spirituality and Rituals as a function of the average grades in Buddhist Philosophy and Meditation. Make sure to maximise the readability of the proposed representation
+```{r}
+grades |>
+  group_by(course,id, group)|>
+  summarise(means= mean(grade), .groups= "drop")|>
+  pivot_wider(names_from = course,
+              values_from = means,
+              id_cols= c(id, group))|>
+  ggplot(aes(x=`Spirituality and Rituals`, y= `Buddhist Philosophy and Meditation`))+
+  geom_point(alpha= 0.3)
+```
 
