@@ -47,5 +47,18 @@ grades |>
   ylab("Number")+
   ggtitle("Distribution of students in groups")
 ```
-
+##Question 6: Compute the average of all the grades in Spirituality and Rituals in each group and display graphically this average as a function of the group. It is recommend to use geom_col() for this task (read the documentation!).
+```{r}
+library(stringr)
+grades |>
+  filter(str_detect(course,"Spirituality and Rituals"))|>
+  group_by(group)|>
+  summarise(Mean=mean(grade))|>
+  mutate(group = factor(group, ordered = TRUE, levels = 1:20))|>
+  ggplot(aes(x=group, y=Mean, fill=group))+
+  geom_col()+
+  xlab("Group")+
+  ylab("Mean")+
+  ggtitle("Distribution of mean in groups")
+```
 
