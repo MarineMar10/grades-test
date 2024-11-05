@@ -158,4 +158,17 @@ grades |>
   ggplot(aes(x=`Spirituality and Rituals`, y= `Buddhist Philosophy and Meditation`))+
   geom_point(alpha= 0.3)
 ```
+## Question 14 The cor() function computes the correlation coefficient between two vectors. It can be used as a summary function in dplyr. Using it, compute the correlation between the average grades in Spirituality and Rituals and the average grades in Architecture and Sculpture group by group.
+```{r}
+grades |>
+  group_by(course,id, group)|>
+  summarise(means= mean(grade), .groups= "drop")|>
+  pivot_wider(names_from = course,
+              values_from = means,
+              id_cols= c(id, group))|>
+  group_by(group)|>
+  summarise(correlation= cor(`Spirituality and Rituals`, `Architecture and Sculpture`))|>
+  slice_sample(n=10)|>
+  knitr::kable()
+```
 
